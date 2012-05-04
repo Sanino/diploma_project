@@ -28,6 +28,7 @@ public class Main {
 				try {
 					mf = new MainFrame(mfl);
 					mf.setVisible(true);
+					mf.addToLog("Лог:");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -51,17 +52,24 @@ public class Main {
 	private MainFrameListener mMainFrameListener = new MainFrameListener() {
 		
 		@Override
-		public void setStuff() {
+		public void setStuff(float stuff) {
 			// TODO Auto-generated method stub
-			System.out.println("!!!!!!!!!!!!!!!");
+			mStuff = stuff;
+			mf.addToLog("Введена общая нагрузка");
+			hasStaff = true;
+			mf.checkStaff(true);
+			if(hasFactors && hasStaff && hasPlan && hasKaf){
+				mf.setCanStarted();
+			}
+			
+			
 		}
 		
 		@Override
 		public void setFactors() {
 			// TODO Auto-generated method stub
 			//mf.dispose();
-			launchFactorsFrame(mFactorsFrameListener);
-			
+			launchFactorsFrame(mFactorsFrameListener);	
 		}
 		
 		@Override
@@ -97,6 +105,30 @@ public class Main {
 			}
 			mf.checkKon(sum);
 			
+			hasPlan = true;
+			mf.checkPlan(true);
+			mf.addToLog("Введен учебный план");
+			if(hasFactors && hasStaff && hasPlan && hasKaf){
+				mf.setCanStarted();
+			}
+			
+			
+		}
+
+		@Override
+		public void setKafedraVolumes(List<Kafedra> kaf) {
+			// TODO Auto-generated method stub
+			mKaf = kaf;
+			for(Kafedra k: mKaf) {
+				System.out.println(k.getKafedraName() + " " + k.getVstup() + " " + k.getAsp() + " " + k.getDoc() + " " + k.getStag());
+			}
+			
+			hasKaf = true;
+			mf.checkKaf(true);
+			mf.addToLog("Введены данные по кафедрам");
+			if(hasFactors && hasStaff && hasPlan && hasKaf){
+				mf.setCanStarted();
+			}
 			
 		}
 	};
@@ -107,21 +139,31 @@ public class Main {
 		public void okBtnClick(FactorsHelper fh) {
 			// TODO Auto-generated method stub
 			mFactors = new Factors(fh);
-			
+			mf.addToLog("Введены коэффициенты расчета");
 			mf.checkFactors(true);
+			if(hasFactors && hasStaff && hasPlan && hasKaf){
+				mf.setCanStarted();
+			}
 		}
 	};
 	
 	private Factors mFactors;
-	private Set<Napravlenie> naprs = new HashSet<Napravlenie>();
-	private Set<Kafedra> kafedrs = new HashSet<Kafedra>();
 	private List<Discipline> disciplines = new ArrayList<Discipline>();
 	private List<OtherWork> otherWorks = new ArrayList<OtherWork>();
 	
 	private MainFrame mf;
 	private FactorsFrame ff;
 	
+	private float mStuff;
+	
+	private boolean hasFactors;
+	private boolean hasStaff;
+	private boolean hasPlan;
+	private boolean hasKaf;
+	
 	Map<String, Integer> kafedr = new HashMap<String, Integer>();
 	Map<String, Integer> napravl = new HashMap<String, Integer>();
+	
+	List<Kafedra> mKaf;
 
 }

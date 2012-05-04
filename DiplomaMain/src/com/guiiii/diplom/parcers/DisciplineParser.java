@@ -78,7 +78,7 @@ public class DisciplineParser {
 			}
 			
 			
-			if(type.equals("ƒ")) {
+			if(type.equals("–î")) {
 				
 				String studyForm = row.getCell(7).getStringCellValue();
 				String curse = row.getCell(8).getStringCellValue();
@@ -89,17 +89,17 @@ public class DisciplineParser {
 				String timeSeminar = "" + row.getCell(13).getNumericCellValue();
 				
 				Occupations.Lection lectionType = null;
-				if(lection.equals("«Œ")){
+				if(lection.equals("–ó–û")){
 					lectionType = Lection.ZO;
-				} else if (lection.equals("œ—")) {
+				} else if (lection.equals("–ü–°")) {
 					lectionType = Lection.PS;
-				} else if (lection.equals("‘ƒ")){
+				} else if (lection.equals("–§–î")){
 					lectionType = Lection.PS;
-				} else if (lection.equals("œ¬")){
+				} else if (lection.equals("–ü–í")){
 					lectionType = Lection.PV;
-				} else if (lection.equals("—œ")){
+				} else if (lection.equals("–°–ü")){
 					lectionType = Lection.SP;
-				} else if (lection.equals("Ãœ")){
+				} else if (lection.equals("–ú–ü")){
 					lectionType = Lection.MP;
 				}
 				if(lectionType == null){
@@ -107,17 +107,17 @@ public class DisciplineParser {
 				}
 				
 				Occupations.Curse curse1 = null;
-				if(curse.equals("1 ÍÛÒ")){
+				if(curse.equals("1 –∫—É—Ä—Å")){
 					curse1 = Curse.FIRST;
-				} else if (curse.equals("2 ÍÛÒ")){
+				} else if (curse.equals("2 –∫—É—Ä—Å")){
 					curse1 = Curse.SECOND;
-				} else if (curse.equals("3 ÍÛÒ")){
+				} else if (curse.equals("3 –∫—É—Ä—Å")){
 					curse1 = Curse.THIRD;
-				} else if (curse.equals("4 ÍÛÒ")){
+				} else if (curse.equals("4 –∫—É—Ä—Å")){
 					curse1 = Curse.FOURTH;
-				} else if (curse.equals("—ÔÂˆ")){
+				} else if (curse.equals("–°–ø–µ—Ü")){
 					curse1 = Curse.SPECIALIST;
-				} else if (curse.equals("Ã‡„ËÒÚ")){
+				} else if (curse.equals("–ú–∞–≥–∏—Å—Ç—Ä")){
 					curse1 = Curse.MAGISTR;
 				}
 				if(curse1 == null) {
@@ -125,9 +125,9 @@ public class DisciplineParser {
 				}
 				
 				Occupations.StudingForm studyFormOcc = null;
-				if(studyForm.equals("‰ÌÂ‚‡ˇ")){
+				if(studyForm.equals("–¥–Ω–µ–≤–∞—è")){
 					studyFormOcc = StudingForm.DAILY;
-				} else if (studyForm.equals("Á‡Ó˜Ì‡ˇ")){
+				} else if (studyForm.equals("–∑–∞–æ—á–Ω–∞—è")){
 					studyFormOcc = StudingForm.ZAOCH;
 				}
 				if(studyFormOcc == null){
@@ -146,28 +146,27 @@ public class DisciplineParser {
 				disciplines.add(d);
 			} else {
 				Occupations.MustOtherWork work = null;
-				if (type.equals(" –1")){
+				if (type.equals("–ö–†1")){
 					work = MustOtherWork.CURSEWORK_ZO_FD;
-				} else if (type.equals(" –2")){
+				} else if (type.equals("–ö–†2")){
 					work = MustOtherWork.CURSEWORK_PS_PV_SP_MP;
-				} else if (type.equals(" œ1")){
+				} else if (type.equals("–ö–ü1")){
 					work = MustOtherWork.CURSEPROJECT_Z0_FD;
-				} else if (type.equals(" œ2")){
-					System.out.println("asdfasdfjsjfl;skjf;sdf");
+				} else if (type.equals("–ö–ü2")){
 					work = MustOtherWork.CURSEPROJECT_PS_PV_SP_MP;
-				} else if (type.equals("œ–”◊")){
+				} else if (type.equals("–ü–†–£–ß")){
 					work = MustOtherWork.STADYPRACTIC;
-				} else if (type.equals("œ–œ–Œ»«¬")){
+				} else if (type.equals("–ü–†–ü–†–û–ò–ó–í")){
 					work = MustOtherWork.WORKPRACTIC;
-				} else if (type.equals("œ–ƒ»œ")){
+				} else if (type.equals("–ü–†–î–ò–ü")){
 					work = MustOtherWork.UNDERGRADUTEPRACTIC;
-				} else if (type.equals("√Œ—")){
+				} else if (type.equals("–ì–û–°")){
 					work = MustOtherWork.STATEEXAM;
-				} else if (type.equals("ƒ»œ–” ")){
+				} else if (type.equals("–î–ò–ü–†–£–ö")){
 					work = MustOtherWork.DIPLOMA_GUIDE;
-				} else if (type.equals("ƒ»œ≈ ")){
+				} else if (type.equals("–î–ò–ü–ï–ö")){
 					work = MustOtherWork.DIPLOMA_ECONOMIC_CONSULTATION;
-				} else if (type.equals("ƒ»œŒ’–")){
+				} else if (type.equals("–î–ò–ü–û–•–†")){
 					work = MustOtherWork.DIPLOMA_HEALTH_SAFE;
 				}
 				if (work == null){
