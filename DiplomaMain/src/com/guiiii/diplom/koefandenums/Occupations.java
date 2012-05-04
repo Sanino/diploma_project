@@ -42,4 +42,11 @@ public class Occupations {
 		DAILY,
 		ZAOCH
 	}
+	
+	public enum KafFactors {
+		VSTUP,
+		ASP,
+		DOC,
+		STAG
+	}
 }

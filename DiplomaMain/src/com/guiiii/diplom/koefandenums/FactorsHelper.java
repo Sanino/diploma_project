@@ -44,4 +44,9 @@ public class FactorsHelper implements Serializable{
 	public float diplomaGuide;
 	public float diplomaEcomomicConsultation;
 	public float diplomaHealthSafe;
+	
+	public float vstup;
+	public float asp;
+	public float doc;
+	public float stag;
 }

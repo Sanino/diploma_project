@@ -26,6 +26,7 @@ import javax.swing.border.TitledBorder;
 
 import com.guiiii.diplom.koefandenums.FactorsHelper;
 import com.guiiii.diplom.util.FactorsFrameListener;
+import javax.swing.SwingConstants;
 
 public class FactorsFrame extends JFrame {
 
@@ -96,7 +97,7 @@ public class FactorsFrame extends JFrame {
 		mFactorsFrameListener = ffl;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
-		setSize(500, 680);
+		setSize(510, 680);
 		contentPane = new JPanel();
 		contentPane.setBorder(UIManager.getBorder("FileChooser.listViewBorder"));
 		setContentPane(contentPane);
@@ -112,17 +113,17 @@ public class FactorsFrame extends JFrame {
 		lfd = new JLabel("\u0424\u0414");
 		
 		fd = new JTextField();
-		fd.setColumns(10);
+		fd.setColumns(6);
 		
 		lpv = new JLabel("\u041F\u0412");
 		
 		pv = new JTextField();
-		pv.setColumns(10);
+		pv.setColumns(6);
 		
 		lsp = new JLabel("\u0421\u041F");
 		
 		sp = new JTextField();
-		sp.setColumns(10);
+		sp.setColumns(6);
 		
 		mp = new JTextField();
 		mp.setColumns(10);
@@ -150,41 +151,41 @@ public class FactorsFrame extends JFrame {
 		panel_2 = new JPanel();
 		panel_2.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u041A\u0443\u0440\u0441\u043E\u0432\u0430\u044F \u0440\u0430\u0431\u043E\u0442\u0430", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		
-		lkr1 = new JLabel("1 \u0432\u0438\u0434 \u0434\u0438\u0441\u0446\u0438\u043F\u043B\u0438\u043D");
+		lkr1 = new JLabel("1 вид");
 		panel_2.add(lkr1);
 		
 		kr1 = new JTextField();
-		kr1.setColumns(6);
+		kr1.setColumns(4);
 		panel_2.add(kr1);
 		
 		separator = new JSeparator();
 		panel_2.add(separator);
 		
-		lkr2 = new JLabel("2 \u0432\u0438\u0434 \u0434\u0438\u0441\u0446\u0438\u043F\u043B\u0438\u043D");
+		lkr2 = new JLabel("  2 вид");
 		panel_2.add(lkr2);
 		
 		kr2 = new JTextField();
-		kr2.setColumns(6);
+		kr2.setColumns(4);
 		panel_2.add(kr2);
 		
 		panel_3 = new JPanel();
 		panel_3.setBorder(new TitledBorder(null, "\u041A\u0443\u0440\u0441\u043E\u0432\u043E\u0439 \u043F\u0440\u043E\u0435\u043A\u0442", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		
-		lkpr1 = new JLabel("1 \u0432\u0438\u0434 \u0434\u0438\u0441\u0446\u0438\u043F\u043B\u0438\u043D");
+		lkpr1 = new JLabel("1 вид");
 		panel_3.add(lkpr1);
 		
 		kpr1 = new JTextField();
-		kpr1.setColumns(6);
+		kpr1.setColumns(4);
 		panel_3.add(kpr1);
 		
 		separator_2 = new JSeparator();
 		panel_3.add(separator_2);
 		
-		lkpr2 = new JLabel("2 \u0432\u0438\u0434 \u0434\u0438\u0441\u0446\u0438\u043F\u043B\u0438\u043D");
+		lkpr2 = new JLabel("  2 вид");
 		panel_3.add(lkpr2);
 		
 		kpr2 = new JTextField();
-		kpr2.setColumns(6);
+		kpr2.setColumns(4);
 		panel_3.add(kpr2);
 		
 		panel_4 = new JPanel();
@@ -200,7 +201,7 @@ public class FactorsFrame extends JFrame {
 		separator_3 = new JSeparator();
 		panel_4.add(separator_3);
 		
-		lprpro = new JLabel("\u041F\u0440\u043E\u0438\u0437\u0432.");
+		lprpro = new JLabel("  Произв.");
 		panel_4.add(lprpro);
 		
 		prpro = new JTextField();
@@ -220,14 +221,14 @@ public class FactorsFrame extends JFrame {
 		separator_4 = new JSeparator();
 		panel_5.add(separator_4);
 		
-		leccons = new JLabel("\u0415\u043A. \u043A\u043E\u043D\u0441\u0443\u043B\u044C\u0442\u0430\u0446\u0438\u044F");
+		leccons = new JLabel("  Ек. консультация");
 		panel_5.add(leccons);
 		
 		eccons = new JTextField();
 		eccons.setColumns(4);
 		panel_5.add(eccons);
 		
-		lohrtrud = new JLabel("\u041E\u0445\u0440. \u0442\u0440\u0443\u0434\u0430");
+		lohrtrud = new JLabel("  Охр. труда");
 		lohrtrud.setToolTipText("");
 		panel_5.add(lohrtrud);
 		
@@ -270,6 +271,10 @@ public class FactorsFrame extends JFrame {
 				dipruc.setText("3.3");
 				eccons.setText("0.40");
 				ohrtrud.setText("0.20");
+				vstup.setText("10");
+				asp.setText("100");
+				doc.setText("50");
+				stag.setText("50");
 			}
 		});
 		
@@ -315,6 +320,10 @@ public class FactorsFrame extends JFrame {
 					dipruc.setText("" + fh1.diplomaGuide);
 					eccons.setText("" + fh1.diplomaEcomomicConsultation);
 					ohrtrud.setText("" + fh1.diplomaHealthSafe);
+					vstup.setText("" + fh1.vstup);
+					asp.setText("" + fh1.asp);
+					doc.setText("" + fh1.doc);
+					stag.setText("" + fh1.stag);
 					
 				} catch (FileNotFoundException e1) {
 					// TODO Auto-generated catch block
@@ -379,6 +388,12 @@ public class FactorsFrame extends JFrame {
 					fh.diplomaGuide = Float.parseFloat(dipruc.getText());
 					fh.diplomaEcomomicConsultation = Float.parseFloat(eccons.getText());
 					fh.diplomaHealthSafe = Float.parseFloat(ohrtrud.getText());
+					fh.vstup = Float.parseFloat(vstup.getText());
+					fh.asp   = Float.parseFloat(asp.getText());
+					fh.doc   = Float.parseFloat(doc.getText());
+					fh.stag  = Float.parseFloat(stag.getText());
+					
+					System.out.println(stag.getText());
 					
 					try {
 						ObjectOutputStream out = new ObjectOutputStream(
@@ -399,15 +414,21 @@ public class FactorsFrame extends JFrame {
 				}
 			}
 		});
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "\u0414\u0440\u0443\u0433\u043E\u0435", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
+			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(panel, GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE))
-						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(panel_6, GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 							.addGap(9)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_contentPane.createSequentialGroup()
@@ -416,32 +437,32 @@ public class FactorsFrame extends JFrame {
 											.addComponent(llab)
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(lab, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
-											.addComponent(lprk, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+											.addComponent(lprk, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(prk, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE))
 										.addGroup(gl_contentPane.createSequentialGroup()
 											.addComponent(lzo)
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(zo, GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+											.addComponent(zo, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
 											.addGap(18)
 											.addComponent(lfd)
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(fd, GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
+											.addComponent(fd, GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
 											.addGap(18)
 											.addComponent(lpv)
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(pv, GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)))
+											.addComponent(pv, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)))
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 										.addGroup(gl_contentPane.createSequentialGroup()
 											.addGap(24)
 											.addComponent(lsp)
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(sp, GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+											.addComponent(sp, GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
 											.addGap(18)
 											.addComponent(lmp)
 											.addGap(2)
-											.addComponent(mp, GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE)
+											.addComponent(mp, GroupLayout.DEFAULT_SIZE, 68, Short.MAX_VALUE)
 											.addPreferredGap(ComponentPlacement.RELATED))
 										.addGroup(gl_contentPane.createSequentialGroup()
 											.addPreferredGap(ComponentPlacement.RELATED)
@@ -449,30 +470,35 @@ public class FactorsFrame extends JFrame {
 											.addGap(4)
 											.addComponent(sem, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE)))
 									.addGap(4))
-								.addGroup(gl_contentPane.createSequentialGroup()
+								.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(button)
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(button_1)
-									.addPreferredGap(ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+									.addPreferredGap(ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
 									.addComponent(button_2, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(gl_contentPane.createSequentialGroup()
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 							.addContainerGap()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(panel_4, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
-								.addComponent(panel_3, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
-								.addComponent(panel_2, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)
-								.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)))
-						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE))
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 462, Short.MAX_VALUE)))
+							.addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(panel_5, GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)))
 					.addContainerGap())
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addGap(4)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 							.addComponent(mp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -489,68 +515,95 @@ public class FactorsFrame extends JFrame {
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 							.addComponent(sp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(lsp)))
+					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(18)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(3)
-									.addComponent(lsem))
-								.addComponent(sem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(prk, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-									.addComponent(llab)
-									.addComponent(lab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(21)
-							.addComponent(lprk)))
-					.addGap(11)
-					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED)
+							.addGap(3)
+							.addComponent(lsem))
+						.addComponent(sem, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(prk, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lprk))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+							.addComponent(llab)
+							.addComponent(lab, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addGap(5)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE))
+					.addGap(10)
+					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(panel_5, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_6, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(button)
 						.addComponent(button_1)
 						.addComponent(button_2))
-					.addContainerGap(25, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		
-		lprdip = new JLabel("\u041F\u0440\u0435\u0434\u0434\u0438\u043F\u043B.");
+		JLabel lvstup = new JLabel("Вступ. экз.");
+		panel_6.add(lvstup);
+		
+		vstup = new JTextField();
+		vstup.setColumns(4);
+		panel_6.add(vstup);
+		
+		JLabel lasp = new JLabel("  Асп.");
+		panel_6.add(lasp);
+		
+		asp = new JTextField();
+		asp.setColumns(4);
+		panel_6.add(asp);
+		
+		JLabel ldoc = new JLabel("  Док.");
+		panel_6.add(ldoc);
+		
+		doc = new JTextField();
+		doc.setColumns(4);
+		panel_6.add(doc);
+		
+		JLabel lstag = new JLabel("  Стаж.");
+		panel_6.add(lstag);
+		
+		stag = new JTextField();
+		stag.setColumns(4);
+		panel_6.add(stag);
+		
+		lprdip = new JLabel("  Преддипл.");
 		panel_4.add(lprdip);
 		
 		prdip = new JTextField();
 		prdip.setColumns(4);
 		panel_4.add(prdip);
 		
-		lgos = new JLabel("\u0413\u043E\u0441");
+		lgos = new JLabel("  Гос");
 		panel_4.add(lgos);
 		
 		gos = new JTextField();
 		gos.setColumns(4);
 		panel_4.add(gos);
 		
-		ltype1 = new JLabel("1 \u0432\u0438\u0434 \u0434\u0438\u0441\u0446\u0438\u043F\u043B\u0438\u043D");
+		ltype1 = new JLabel("1 вид  дисциплин");
 		panel_1.add(ltype1);
 		
 		type1 = new JTextField();
-		type1.setColumns(6);
+		type1.setColumns(5);
 		panel_1.add(type1);
 		
 		separator_1 = new JSeparator();
 		panel_1.add(separator_1);
 		
-		ltype2 = new JLabel("2 \u0432\u0438\u0434 \u0434\u0438\u0441\u0446\u0438\u043F\u043B\u0438\u043D");
+		ltype2 = new JLabel("  2 вид дисциплин");
 		panel_1.add(ltype2);
 		
 		type2 = new JTextField();
-		type2.setColumns(6);
+		type2.setColumns(5);
 		panel_1.add(type2);
 		
 		JLabel label = new JLabel("\u041A\u0443\u0440\u0441/\u0424\u043E\u0440\u043C\u0430");
@@ -566,8 +619,10 @@ public class FactorsFrame extends JFrame {
 		JLabel k5 = new JLabel("\u0421\u043F\u0435\u0446\u0438\u0430\u043B\u0438\u0441\u0442");
 		
 		JLabel label_6 = new JLabel("\u0417\u0430\u043E\u0447\u043D\u0430\u044F");
+		label_6.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JLabel label_7 = new JLabel("\u0414\u043D\u0435\u0432\u043D\u0430\u044F");
+		label_7.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		d1 = new JTextField();
 		d1.setColumns(10);
@@ -725,10 +780,18 @@ public class FactorsFrame extends JFrame {
 		content.put(dipruc, ldipruc);
 		content.put(eccons, leccons);
 		content.put(ohrtrud, lohrtrud);
+		content.put(vstup, lvstup);
+		content.put(asp, lasp);
+		content.put(doc, ldoc);
+		content.put(stag, lstag);
 		
 	}
 	
 	private Map<JTextField,  JLabel> content = new HashMap<JTextField, JLabel>();
 	FactorsFrameListener mFactorsFrameListener;
 	private FactorsHelper fh = new FactorsHelper();
+	private JTextField vstup;
+	private JTextField asp;
+	private JTextField doc;
+	private JTextField stag;
 }

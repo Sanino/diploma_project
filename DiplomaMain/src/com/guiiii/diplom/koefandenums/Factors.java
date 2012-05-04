@@ -41,6 +41,11 @@ public class Factors {
 		 mDiplomaGuide                = fh.diplomaGuide;
 		 mDiplomaEcomomicConsultation = fh.diplomaEcomomicConsultation;
 		 mDiplomaHealthSafe           = fh.diplomaHealthSafe;
+		 
+		 mVstup = fh.vstup;
+		 mAsp   = fh.asp;
+		 mDoc   = fh.doc;
+		 mStag  = fh.stag;
 	}
 	
 	public float getFactorKN(Occupations.Curse curse,
@@ -151,6 +156,20 @@ public class Factors {
 		return -1;
 	}
 	
+	public float getKafFactors(Occupations.KafFactors kafFactors){
+		switch(kafFactors){
+		case VSTUP:
+			return mVstup;
+		case ASP:
+			return mAsp;
+		case DOC:
+			return mDoc;
+		case STAG:
+			return mStag;			
+		}
+		return -1;
+	}
+	
 	private float mDayliFirst;
 	private float mDayliSecond;
 	private float mDayliThird;
@@ -189,6 +208,9 @@ public class Factors {
 	private float mDiplomaEcomomicConsultation;
 	private float mDiplomaHealthSafe;
 	
-	
+	private float mVstup;
+	private float mAsp;
+	private float mDoc;
+	private float mStag;
 }
 
