@@ -1,6 +1,7 @@
 package com.guiiii.diplom.uchchast;
 
 import com.guiiii.diplom.koefandenums.Occupations;
+import com.guiiii.diplom.koefandenums.Occupations.StudingForm;
 
 public class Discipline extends Employment {
 	
@@ -21,6 +22,10 @@ public class Discipline extends Employment {
 		mCurse = ot.getCurse();
 		mLection = ot.getLection();
 		mStudingForm = ot.getStudForm();
+	}
+	
+	public String getName() {
+		return mName;
 	}
 	
 	@Override
@@ -46,6 +51,13 @@ public class Discipline extends Employment {
 		return mContingent;
 	}
 	
+	public StudingForm getStudingForm() {
+		return mStudingForm;
+	}
+	
+	public String toString() {
+		return mName + " " + mNapravlenie + " " + mKafedra + " " + mStudingForm;
+	}
 	private String mName;
 	
 	private String mNapravlenie;

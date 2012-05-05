@@ -29,6 +29,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import com.guiiii.diplom.parcers.DisciplineParser;
 import com.guiiii.diplom.parcers.KafedrasParser;
 import com.guiiii.diplom.util.MainFrameListener;
+import java.awt.Insets;
+import javax.swing.ImageIcon;
 
 public class MainFrame extends JFrame {
 
@@ -45,7 +47,7 @@ public class MainFrame extends JFrame {
 	public MainFrame(MainFrameListener mainframeListener) {
 		mMainFrameListener = mainframeListener;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 550, 340);
+		setBounds(100, 100, 650, 352);
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -144,8 +146,22 @@ public class MainFrame extends JFrame {
 		panel.add(btnSetFactors);
 		
 		btnNewButton = new JButton("Calculate");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+							mMainFrameListener.calculate();
+			}
+		});
 		btnNewButton.setEnabled(false);
 		panel.add(btnNewButton);
+		
+		JButton button = new JButton("");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				textArea.setText("");
+			}
+		});
+		button.setIcon(new ImageIcon(MainFrame.class.getResource("/javax/swing/plaf/metal/icons/ocean/close.gif")));
+		panel.add(button);
 		
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
@@ -155,7 +171,12 @@ public class MainFrame extends JFrame {
 		panel_1.add(scrollPane, BorderLayout.CENTER);
 		
 		textArea = new JTextArea();
-		textArea.setFont(new Font("Monospaced", Font.PLAIN, 11));
+		textArea.setWrapStyleWord(true);
+		textArea.setMargin(new Insets(2, 4, 2, 2));
+		textArea.setLineWrap(true);
+		textArea.setTabSize(4);
+		textArea.setEditable(false);
+		textArea.setFont(new Font("MS Reference Sans Serif", Font.PLAIN, 12));
 		scrollPane.setViewportView(textArea);
 		
 		JPanel panel_2 = new JPanel();
@@ -191,8 +212,8 @@ public class MainFrame extends JFrame {
 					.addGroup(gl_panel_3.createParallelGroup(Alignment.LEADING)
 						.addComponent(checkBoxNagr)
 						.addComponent(chckbxUch, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)
-						.addComponent(chckbxkoef)
-						.addComponent(checkBoxkaf))
+						.addComponent(checkBoxkaf)
+						.addComponent(chckbxkoef))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_panel_3.setVerticalGroup(
@@ -203,9 +224,9 @@ public class MainFrame extends JFrame {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(chckbxUch, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(chckbxkoef)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(checkBoxkaf)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(chckbxkoef)
 					.addContainerGap(64, Short.MAX_VALUE))
 		);
 		panel_3.setLayout(gl_panel_3);
@@ -233,25 +254,6 @@ public class MainFrame extends JFrame {
 		checkBoxkaf.setSelected(true);
 	}
 	
-	public void checkNapr(int napr) {
-		//lblNapr.setText("���-�� ����������� - " + napr);
-	}
-	
-	public void checkKaf(int kaf) {
-		//lblKaf.setText("���-�� ������ - " + kaf);
-	}
-	
-	public void checkDis(int dis) {
-		//lblDis.setText("���-�� ��������� - " + dis);
-	}
-	
-	public void checkWorks(int w) {
-		//lblWorks.setText("���-�� ������ ����� - " + w);
-	}
-	
-	public void checkKon(int k) {
-		//lblCon.setText("����� ���������� - " + k);
-	}
 	
 	public void setCanStarted() {
 		btnNewButton.setEnabled(true);
@@ -272,5 +274,5 @@ public class MainFrame extends JFrame {
 	private JCheckBox checkBoxNagr;
 	private JCheckBox checkBoxkaf;
 	
-	JTextArea textArea;
+	private JTextArea textArea;
 }

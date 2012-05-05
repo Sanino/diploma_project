@@ -31,14 +31,12 @@ public class DisciplineParser {
 		//cafNames.clear();
 		//stud.clear();
 		try {
-			System.out.println("" + file);
 			 InputStream in = new FileInputStream(file);
 	    	 HSSFWorkbook wb = new HSSFWorkbook(in);
 	    	 
 	    	 Sheet sheet = wb.getSheetAt(0);
 	    	 
-	    	 System.out.println(sheet);
-	    	 System.out.println(sheet.getRowSumsBelow());
+
 	         Iterator<Row> it = sheet.iterator();
 	         
 	         while (it.hasNext()) {	 
@@ -70,9 +68,8 @@ public class DisciplineParser {
 			String napr = row.getCell(4).getStringCellValue();
 			String cont = "" + (int)row.getCell(5).getNumericCellValue();
 			String credits = "" + (float)row.getCell(6).getNumericCellValue();
+			String studyForm = row.getCell(7).getStringCellValue();
 			
-			
-			System.out.println("name " + name + " type " + type + " " + kafedra + " " + napr + " " + cont + " " + credits);
 			if(type == null){
 				throw new NullPointerException();
 			}
@@ -80,7 +77,6 @@ public class DisciplineParser {
 			
 			if(type.equals("Д")) {
 				
-				String studyForm = row.getCell(7).getStringCellValue();
 				String curse = row.getCell(8).getStringCellValue();
 				String lection = row.getCell(9).getStringCellValue();
 				String timeLection = "" + row.getCell(10).getNumericCellValue();
@@ -172,10 +168,18 @@ public class DisciplineParser {
 				if (work == null){
 					throw new NullPointerException();
 				}
-				System.out.println(work);
 				
-				OtherWork ow = new OtherWork(name, kafedra, napr, Float.parseFloat(credits), Integer.parseInt(cont), work);
-				System.out.println(ow);
+				Occupations.StudingForm studyFormOcc = null;
+				if(studyForm.equals("дневая")){
+					studyFormOcc = StudingForm.DAILY;
+				} else if (studyForm.equals("заочная")){
+					studyFormOcc = StudingForm.ZAOCH;
+				}
+				if(studyFormOcc == null){
+					throw new NullPointerException();
+				}
+				
+				OtherWork ow = new OtherWork(name, kafedra, napr, studyFormOcc, Float.parseFloat(credits), Integer.parseInt(cont), work);
 				
 				otherWorks.add(ow);
 			}		
