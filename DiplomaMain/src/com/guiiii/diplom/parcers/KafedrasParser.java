@@ -15,51 +15,49 @@ import com.guiiii.diplom.uchchast.Kafedra;
 import com.guiiii.diplom.util.MainFrameListener;
 
 public class KafedrasParser {
-	public int open (File file, MainFrameListener mMainFrameListener) {
-		try {
-			 InputStream in = new FileInputStream(file);
-	    	 HSSFWorkbook wb = new HSSFWorkbook(in);
-	    	 
-	    	 Sheet sheet = wb.getSheetAt(1);
+    List<Kafedra> kafedras = new ArrayList<Kafedra>();
 
-	         Iterator<Row> it = sheet.iterator();
-	         
-	         while (it.hasNext()) {	 
-	            Row row = it.next();
-	            parseLoad(row);
-	         }
-		}
-		catch(Exception e) {
-			e.printStackTrace();
-			return 1;
-		}
-		
-		if(kafedras.size() == 0)
-		{
-			return 1;
-		}
-		
-		System.out.println(kafedras.size());
-		mMainFrameListener.setKafedraVolumes(kafedras);
-		
-		
+    public int open(File file, MainFrameListener mMainFrameListener) {
+        try {
+            final InputStream in = new FileInputStream(file);
+            final HSSFWorkbook wb = new HSSFWorkbook(in);
+
+            final Sheet sheet = wb.getSheetAt(1);
+
+            final Iterator<Row> it = sheet.iterator();
+
+            while (it.hasNext()) {
+                final Row row = it.next();
+                parseLoad(row);
+            }
+        } catch (final Exception e) {
+            e.printStackTrace();
+            return 1;
+        }
+
+        if (kafedras.size() == 0) {
+            return 1;
+        }
+
+        System.out.println(kafedras.size());
+        mMainFrameListener.setKafedraVolumes(kafedras);
+
         return 0;
-	}
-	
-	private void parseLoad(Row row) {
-		try{
-			String name = row.getCell(0).getStringCellValue();
-			int vstup = (int)row.getCell(1).getNumericCellValue();
-			int asp = (int)row.getCell(2).getNumericCellValue();
-			int doc = (int)row.getCell(3).getNumericCellValue();
-			int stag = (int)row.getCell(4).getNumericCellValue();
-			
-			kafedras.add(new Kafedra(name, vstup, asp, doc, stag));
-					
-		}catch (Exception e){
-			//e.printStackTrace();
-		}
-		
-	}
-	List<Kafedra> kafedras = new ArrayList<Kafedra>();
+    }
+
+    private void parseLoad(Row row) {
+        try {
+            final String name = row.getCell(0).getStringCellValue();
+            final int vstup = (int) row.getCell(1).getNumericCellValue();
+            final int asp = (int) row.getCell(2).getNumericCellValue();
+            final int doc = (int) row.getCell(3).getNumericCellValue();
+            final int stag = (int) row.getCell(4).getNumericCellValue();
+
+            kafedras.add(new Kafedra(name, vstup, asp, doc, stag));
+
+        } catch (final Exception e) {
+            // e.printStackTrace();
+        }
+
+    }
 }

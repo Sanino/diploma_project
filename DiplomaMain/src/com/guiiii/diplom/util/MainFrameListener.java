@@ -7,9 +7,13 @@ import com.guiiii.diplom.uchchast.Kafedra;
 import com.guiiii.diplom.uchchast.OtherWork;
 
 public abstract class MainFrameListener {
-	public abstract void setFactors();
-	public abstract void setStudingPlan(List<Discipline> ds, List<OtherWork> ow);
-	public abstract void setKafedraVolumes(List<Kafedra> kaf); 
-	public abstract void setStuff(float stuff);
-	public abstract void calculate();
+    public abstract void calculate();
+
+    public abstract void setFactors();
+
+    public abstract void setKafedraVolumes(List<Kafedra> kaf);
+
+    public abstract void setStudingPlan(List<Discipline> ds, List<OtherWork> ow);
+
+    public abstract void setStuff(float stuff);
 }
