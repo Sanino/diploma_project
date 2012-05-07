@@ -1,89 +1,43 @@
 package com.guiiii.diplom.uchchast;
 
+import com.guiiii.diplom.koefandenums.Factors;
 import com.guiiii.diplom.koefandenums.Occupations;
+import com.guiiii.diplom.koefandenums.Occupations.OtherDisciplineWork;
 import com.guiiii.diplom.koefandenums.Occupations.StudingForm;
 
 public class Discipline extends Employment {
 	
-	public Discipline(String name, String nap, String kaf,
-			float credits, int contingent, StudyTiming st, OccupationsTrain ot) {
-		mName = name;
-		
-		mNapravlenie = nap;
-		mKafedra     = kaf;
-		mCredits     = credits;
-		mContingent  = contingent;
-		
+	public Discipline(String name, String kaf,String napr, StudingForm studyForm,
+			float credits, int contingent, StudyTiming st, 
+			Occupations.Curse curse, Occupations.Lection lection) {
+		super(name, napr, kaf, studyForm, credits, contingent);	    	
 		mLectionTimeWeek = st.getLectionTime();
 		mLaboratoriesTimeWeek = st.getLabTime();
 		mPracticalTimeWeek = st.getPracticalTime();
 		mSeminarTimeWeek = st.getSemionarTime();
-		
-		mCurse = ot.getCurse();
-		mLection = ot.getLection();
-		mStudingForm = ot.getStudForm();
-	}
-	
-	public String getName() {
-		return mName;
+		mCurse = curse;
+		mLection = lection;
 	}
 	
 	@Override
-	void calculateFactor() {
-		// TODO Auto-generated method stub
+	void calculateFactor(Factors factors) {
+		float kjk = (mLectionTimeWeek * factors.getFactorKL(mLection) +
+				mLaboratoriesTimeWeek * factors.getFactorLbPrS(OtherDisciplineWork.LABWORK) +
+				mPracticalTimeWeek * factors.getFactorLbPrS(OtherDisciplineWork.PRACTICWORK) +
+				mSeminarTimeWeek * factors.getFactorLbPrS(OtherDisciplineWork.SEMINARWORKS));
+		kjk /= (mLectionTimeWeek + mLaboratoriesTimeWeek + mPracticalTimeWeek + mSeminarTimeWeek);
 		
+		mKoef = ((1.44f * mCredits * kjk * factors.getFactorKN(mCurse, mStudyForm)) + 
+				(0.2f * factors.getFactorKN(mCurse, mStudyForm)) +
+				(0.33f * mCredits) + (0.086f* mCredits * factors.getFactorKN(mCurse, mStudyForm)) +
+				0.5f) * mContingent * factors.getFactorKM(mLection);	
 	}
-	@Override
-	void calculateStuff() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	public String getKafedra() {
-		return mKafedra;
-	}
-	
-	public String getNapr() {
-		return mNapravlenie;
-	}
-	
-	public int getContingent() {
-		return mContingent;
-	}
-	
-	public StudingForm getStudingForm() {
-		return mStudingForm;
-	}
-	
-	public String toString() {
-		return mName + " " + mNapravlenie + " " + mKafedra + " " + mStudingForm;
-	}
-	private String mName;
-	
-	private String mNapravlenie;
-	private String     mKafedra;
-	
-	private float mCredits;
-	private int mContingent;
 	
 	private float mLectionTimeWeek;
 	private float mLaboratoriesTimeWeek;
 	private float mPracticalTimeWeek;
 	private float mSeminarTimeWeek;
 
-	private Occupations.Curse       mCurse;
-	private Occupations.Lection     mLection;
-	private Occupations.StudingForm mStudingForm;
-	
-	private float kLaboriousness;
-	private float kClassType;
-	private float kCourseType;
-	
-	private float kLection;
-	private float kLaboratories;
-	private float kPractical;
-	private float kSeminar;
-	private float kFactor;
-	
-	private float mShtat;
+	private Occupations.Curse   mCurse;
+	private Occupations.Lection mLection;
 }

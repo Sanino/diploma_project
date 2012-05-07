@@ -30,6 +30,10 @@ import javax.swing.SwingConstants;
 
 public class FactorsFrame extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9164483766832867880L;
 	private JPanel contentPane;
 	private JTextField d1;
 	private JTextField z1;

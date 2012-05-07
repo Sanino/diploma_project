@@ -1,27 +1,28 @@
 package com.guiiii.diplom.gui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Dialog.ModalExclusionType;
-import java.awt.Window.Type;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
 import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import com.guiiii.diplom.util.MainFrameListener;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class StaffFrame extends JFrame {
 
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4524723272426657815L;
 	private JPanel contentPane;
 	private JTextField textField;
 

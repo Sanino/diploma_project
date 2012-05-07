@@ -17,7 +17,6 @@ import com.guiiii.diplom.koefandenums.Occupations.Lection;
 import com.guiiii.diplom.koefandenums.Occupations.MustOtherWork;
 import com.guiiii.diplom.koefandenums.Occupations.StudingForm;
 import com.guiiii.diplom.uchchast.Discipline;
-import com.guiiii.diplom.uchchast.OccupationsTrain;
 import com.guiiii.diplom.uchchast.OtherWork;
 import com.guiiii.diplom.uchchast.StudyTiming;
 import com.guiiii.diplom.util.MainFrameListener;
@@ -135,9 +134,10 @@ public class DisciplineParser {
 						Float.parseFloat(timePrk),
 						Float.parseFloat(timeSeminar));
 				
-				OccupationsTrain otr = new OccupationsTrain(curse1, lectionType, studyFormOcc);
-				Discipline d = new Discipline(name, napr, kafedra, Float.parseFloat(credits),
-						Integer.parseInt(cont), st, otr);
+				Discipline d = new Discipline(name, napr, kafedra,studyFormOcc,
+						Float.parseFloat(credits), Integer.parseInt(cont),
+						st, curse1, lectionType);
+				
 				
 				disciplines.add(d);
 			} else {

@@ -1,7 +1,6 @@
 package com.guiiii.diplom.uchchast;
 
 import java.awt.EventQueue;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,12 +15,12 @@ import com.guiiii.diplom.util.MainFrameListener;
 
 public class Main {
 
-	public Main() {
+	public static void main(String [] args) {
 		// TODO Auto-generated method stub
 		launchMainFrame(mMainFrameListener);
 	}
 
-	public void launchMainFrame(final MainFrameListener mfl) {
+	public static void launchMainFrame(final MainFrameListener mfl) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -36,7 +35,7 @@ public class Main {
 	}
 
 
-	public void launchFactorsFrame(final FactorsFrameListener ffl) {
+	public static void launchFactorsFrame(final FactorsFrameListener ffl) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -48,7 +47,7 @@ public class Main {
 			}
 		});
 	}
-	private MainFrameListener mMainFrameListener = new MainFrameListener() {
+	private static MainFrameListener mMainFrameListener = new MainFrameListener() {
 
 		@Override
 		public void setStuff(float stuff) {
@@ -71,22 +70,20 @@ public class Main {
 
 		@Override
 		public void calculate() {
-			// TODO Auto-generated method stub
 			int aspSum = 0;
 			int doctSum = 0;
 			int vstupSum = 0;
 			int stagSum = 0;
 			
-				for(Kafedra k : mKaf) {
-								aspSum += k.getAsp();
-								vstupSum += k.getVstup();
-								doctSum += k.getDoc();
-								stagSum += k.getStag();
-				}
-				mf.addToLog("Нагрузка необходимая на проведение вступительных экзаменов: " 
-												+ vstupSum + " * " + mFactors.getKafFactors(KafFactors.VSTUP) + " = " +
-												(mFactors.getKafFactors(KafFactors.VSTUP) * vstupSum));
-				
+			for(Kafedra k : mKaf) {
+							aspSum += k.getAsp();
+							vstupSum += k.getVstup();
+							doctSum += k.getDoc();
+							stagSum += k.getStag();
+			}
+			mf.addToLog("Нагрузка необходимая на проведение вступительных экзаменов: " 
+					+ vstupSum + " * " + mFactors.getKafFactors(KafFactors.VSTUP) + " = " +
+					(mFactors.getKafFactors(KafFactors.VSTUP) * vstupSum));				
 				mf.addToLog("Нагрузка необходимая на руководство аспирантами: " 
 												+ aspSum + " * " + mFactors.getKafFactors(KafFactors.ASP) + " = " +
 												(mFactors.getKafFactors(KafFactors.ASP) * aspSum));
@@ -129,7 +126,7 @@ public class Main {
 					for (Discipline d: disciplines) {
 						d.toString();
 						if(d.getNapr().equals(napr)){
-							switch(d.getStudingForm()) {
+							switch(d.getStudyForm()) {
 							case DAILY:
 								dayliStuff += d.getContingent();
 								break;
@@ -143,7 +140,7 @@ public class Main {
 						for (OtherWork d: otherWorks) {
 							d.toString();
 							if(d.getNapr().equals(napr)){
-								switch(d.getStudingForm()) {
+								switch(d.getStudyForm()) {
 								case DAILY:
 									dayliStuff += d.getContingent();
 									break;
@@ -170,9 +167,54 @@ public class Main {
 				}
 				mf.addToLog("Общая нагрузка: " + sum); 
 				
-				
-				
-		}
+				for(String s: sumPriv.keySet()){
+					float koefsum = 0;
+					for (Discipline d: disciplines) {
+						d.toString();
+						if(d.getNapr().equals(s)){
+							d.calculateFactor(mFactors);
+							koefsum += d.getKoef();
+						}
+					}
+					for(OtherWork d: otherWorks) {
+						if(d.getNapr().equals(s)){
+							d.calculateFactor(mFactors);
+							koefsum += d.getKoef();
+						}
+					}
+					
+					for (Discipline d: disciplines) {
+						d.toString();
+						if(d.getNapr().equals(s)){
+							d.setStuff(sumPriv.get(s) * (d.getKoef()/koefsum));
+						}
+					}
+					
+					for(OtherWork d: otherWorks) {
+						if(d.getNapr().equals(s)){
+							d.setStuff(sumPriv.get(s) * (d.getKoef()/koefsum));
+						}
+					}
+				}
+					
+				for(String kaf : kafedr.keySet()) {
+					float kaffStaff = 0;
+					for (Discipline d: disciplines) {
+						if(d.getKafedra().equals(kaf)){
+							kaffStaff += d.getStuff();
+						}
+					}
+					
+					for(OtherWork d: otherWorks) {
+						if(d.getKafedra().equals(kaf)){
+							kaffStaff += d.getStuff();
+						}
+					}
+					mf.addToLog("Нагрузка кафедры " + kaf + ": " + kaffStaff); 
+				}
+					
+						
+			}
 
 		@Override
 		public void setStudingPlan(List<Discipline> ds, List<OtherWork> ow) {
@@ -212,6 +254,7 @@ public class Main {
 				mf.addToLog("\tКонтингент: " + d.getContingent());
 				mf.addToLog("\tКафедра: " + d.getKafedra());
 				mf.addToLog("\tНаправление: " + d.getNapr());
+				mf.addToLog("\tФорма обучения: " + d.getStudyForm());
 				i++;
 			}
 			
@@ -250,7 +293,7 @@ public class Main {
 		}
 	};
 
-	private FactorsFrameListener mFactorsFrameListener = new FactorsFrameListener() {
+	private static FactorsFrameListener mFactorsFrameListener = new FactorsFrameListener() {
 
 		@Override
 		public void okBtnClick(FactorsHelper fh) {
@@ -265,23 +308,23 @@ public class Main {
 		}
 	};
 
-	private Factors mFactors;
-	private List<Discipline> disciplines ;
-	private List<OtherWork> otherWorks;
+	private static Factors mFactors;
+	private static List<Discipline> disciplines ;
+	private static List<OtherWork> otherWorks;
 
-	private MainFrame mf;
-	private FactorsFrame ff;
+	private static MainFrame mf;
+	private static FactorsFrame ff;
 
-	private float mStuff;
+	private static float mStuff;
 
-	private boolean hasFactors;
-	private boolean hasStaff;
-	private boolean hasPlan;
-	private boolean hasKaf;
+	private static boolean hasFactors;
+	private static boolean hasStaff;
+	private static boolean hasPlan;
+	private static boolean hasKaf;
 
-	Map<String, Integer> kafedr = new HashMap<String, Integer>();
-	Map<String, Integer> napravl = new HashMap<String, Integer>();
+	private static Map<String, Integer> kafedr = new HashMap<String, Integer>();
+	private static Map<String, Integer> napravl = new HashMap<String, Integer>();
 
-	List<Kafedra> mKaf;
+	private static List<Kafedra> mKaf;
 
 }
