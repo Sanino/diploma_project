@@ -15,68 +15,90 @@ import com.guiiii.diplom.koefandenums.Occupations;
 import com.guiiii.diplom.koefandenums.Occupations.Curse;
 import com.guiiii.diplom.koefandenums.Occupations.Lection;
 import com.guiiii.diplom.koefandenums.Occupations.MustOtherWork;
-import com.guiiii.diplom.koefandenums.Occupations.StudingForm;
 import com.guiiii.diplom.uchchast.Discipline;
+import com.guiiii.diplom.uchchast.DisciplineZaoch;
 import com.guiiii.diplom.uchchast.OtherWork;
 import com.guiiii.diplom.uchchast.StudyTiming;
 import com.guiiii.diplom.util.MainFrameListener;
 
 public class DisciplineParser {
+    List<Discipline> disciplines = new ArrayList<Discipline>();
+    List<DisciplineZaoch> disciplinesZ = new ArrayList<DisciplineZaoch>();
+
+    List<OtherWork> otherWorks = new ArrayList<OtherWork>();
+
     public DisciplineParser() {
 
     }
 
     public int open(File file, MainFrameListener mMainFrameListener) {
-        // cafNames.clear();
-        // stud.clear();
+
         try {
-            InputStream in = new FileInputStream(file);
-            HSSFWorkbook wb = new HSSFWorkbook(in);
+            final InputStream in = new FileInputStream(file);
+            final HSSFWorkbook wb = new HSSFWorkbook(in);
 
-            Sheet sheet = wb.getSheetAt(0);
+            final Sheet sheet = wb.getSheetAt(0);
 
-            Iterator<Row> it = sheet.iterator();
+            final Iterator<Row> it = sheet.iterator();
 
             while (it.hasNext()) {
-                Row row = it.next();
+                final Row row = it.next();
                 parseLoad(row);
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
             return 1;
         }
 
-        if (disciplines.size() == 0 && otherWorks.size() == 0) {
+        if ((disciplines.size() == 0) && (otherWorks.size() == 0)) {
             return 1;
         }
 
-        mMainFrameListener.setStudingPlan(disciplines, otherWorks);
+        mMainFrameListener.setStudingPlan(disciplines,disciplinesZ, otherWorks);
 
         return 0;
     }
-
     private void parseLoad(Row row) {
         try {
-            String name = row.getCell(1).getStringCellValue();
-            String type = row.getCell(2).getStringCellValue();
-            String kafedra = row.getCell(3).getStringCellValue();
-            String napr = row.getCell(4).getStringCellValue();
-            String cont = "" + (int) row.getCell(5).getNumericCellValue();
-            String credits = "" + (float) row.getCell(6).getNumericCellValue();
-            String studyForm = row.getCell(7).getStringCellValue();
+            final String name = row.getCell(1).getStringCellValue();
+            final String type = row.getCell(2).getStringCellValue();
+            final String kafedra = row.getCell(3).getStringCellValue();
+            final String napr = row.getCell(4).getStringCellValue();
+            final String cont = "" + (int) row.getCell(5).getNumericCellValue();
+            final String credits = "" + (float) row.getCell(6).getNumericCellValue();
+            final String studyForm = row.getCell(7).getStringCellValue();
+            final String curse = row.getCell(8).getStringCellValue();
 
             if (type == null) {
                 throw new NullPointerException();
             }
 
+            Occupations.Curse curse1 = null;
+            if (curse.equals("1 курс")) {
+                curse1 = Curse.FIRST;
+            } else if (curse.equals("2 курс")) {
+                curse1 = Curse.SECOND;
+            } else if (curse.equals("3 курс")) {
+                curse1 = Curse.THIRD;
+            } else if (curse.equals("4 курс")) {
+                curse1 = Curse.FOURTH;
+            } else if (curse.equals("Спец")) {
+                curse1 = Curse.SPECIALIST;
+            } else if (curse.equals("Магистр")) {
+                curse1 = Curse.MAGISTR;
+            }
+            if (curse1 == null) {
+                throw new NullPointerException();
+            }
+            
             if (type.equals("Д")) {
 
-                String curse = row.getCell(8).getStringCellValue();
-                String lection = row.getCell(9).getStringCellValue();
-                String timeLection = "" + row.getCell(10).getNumericCellValue();
-                String timeLab = "" + row.getCell(11).getNumericCellValue();
-                String timePrk = "" + row.getCell(12).getNumericCellValue();
-                String timeSeminar = "" + row.getCell(13).getNumericCellValue();
+
+                final String lection = row.getCell(9).getStringCellValue();
+                final String timeLection = "" + row.getCell(10).getNumericCellValue();
+                final String timeLab = "" + row.getCell(11).getNumericCellValue();
+                final String timePrk = "" + row.getCell(12).getNumericCellValue();
+                final String timeSeminar = "" + row.getCell(13).getNumericCellValue();
 
                 Occupations.Lection lectionType = null;
                 if (lection.equals("ЗО")) {
@@ -96,43 +118,30 @@ public class DisciplineParser {
                     throw new NullPointerException();
                 }
 
-                Occupations.Curse curse1 = null;
-                if (curse.equals("1 курс")) {
-                    curse1 = Curse.FIRST;
-                } else if (curse.equals("2 курс")) {
-                    curse1 = Curse.SECOND;
-                } else if (curse.equals("3 курс")) {
-                    curse1 = Curse.THIRD;
-                } else if (curse.equals("4 курс")) {
-                    curse1 = Curse.FOURTH;
-                } else if (curse.equals("Спец")) {
-                    curse1 = Curse.SPECIALIST;
-                } else if (curse.equals("Магистр")) {
-                    curse1 = Curse.MAGISTR;
-                }
-                if (curse1 == null) {
-                    throw new NullPointerException();
-                }
 
+                final StudyTiming st = new StudyTiming(Float.parseFloat(timeLection),
+                        Float.parseFloat(timeLab), Float.parseFloat(timePrk),
+                        Float.parseFloat(timeSeminar));
+
+                
                 Occupations.StudingForm studyFormOcc = null;
-                if (studyForm.equals("дневая")) {
-                    studyFormOcc = StudingForm.DAILY;
+                if (studyForm.equals("дневная")) {
+                    final Discipline d = new Discipline(name, napr, kafedra,
+                            Float.parseFloat(credits),Integer.parseInt(cont),
+                            st, curse1, lectionType);
+                    disciplines.add(d);
                 } else if (studyForm.equals("заочная")) {
-                    studyFormOcc = StudingForm.ZAOCH;
+                    final DisciplineZaoch d = new DisciplineZaoch(name, napr, kafedra,
+                            Float.parseFloat(credits),Integer.parseInt(cont),
+                            st, curse1, lectionType);
+                    disciplinesZ.add(d);
                 }
                 if (studyFormOcc == null) {
                     throw new NullPointerException();
                 }
+                
 
-                StudyTiming st = new StudyTiming(Float.parseFloat(timeLection),
-                        Float.parseFloat(timeLab), Float.parseFloat(timePrk),
-                        Float.parseFloat(timeSeminar));
-
-                Discipline d = new Discipline(name, napr, kafedra,
-                        studyFormOcc, Float.parseFloat(credits),
-                        Integer.parseInt(cont), st, curse1, lectionType);
-
-                disciplines.add(d);
+                
             } else {
                 Occupations.MustOtherWork work = null;
                 if (type.equals("КР1")) {
@@ -162,27 +171,15 @@ public class DisciplineParser {
                     throw new NullPointerException();
                 }
 
-                Occupations.StudingForm studyFormOcc = null;
-                if (studyForm.equals("дневая")) {
-                    studyFormOcc = StudingForm.DAILY;
-                } else if (studyForm.equals("заочная")) {
-                    studyFormOcc = StudingForm.ZAOCH;
-                }
-                if (studyFormOcc == null) {
-                    throw new NullPointerException();
-                }
 
-                OtherWork ow = new OtherWork(name, kafedra, napr, studyFormOcc,
-                        Float.parseFloat(credits), Integer.parseInt(cont), work);
+                final OtherWork ow = new OtherWork(name, kafedra, napr,
+                        Float.parseFloat(credits), Integer.parseInt(cont),curse1, work);
 
                 otherWorks.add(ow);
             }
-        } catch (Exception e) {
+        } catch (final Exception e) {
             // e.printStackTrace();
         }
 
     }
-
-    List<Discipline> disciplines = new ArrayList<Discipline>();
-    List<OtherWork> otherWorks = new ArrayList<OtherWork>();
 }

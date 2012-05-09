@@ -12,21 +12,23 @@ public class Discipline extends Employment {
     private final float mPracticalTimeWeek;
     private final float mSeminarTimeWeek;
 
-    private final Occupations.Curse mCurse;
     private final Occupations.Lection mLection;
 
     public Discipline(String name, String kaf, String napr,
-            StudingForm studyForm, float credits, int contingent,
-            StudyTiming st, Occupations.Curse curse, Occupations.Lection lection) {
-        super(name, napr, kaf, studyForm, credits, contingent);
+            float credits, int contingent, StudyTiming st,
+            Occupations.Curse curse, Occupations.Lection lection) {
+        super(name, napr, kaf, credits, contingent, curse);
         mLectionTimeWeek = st.getLectionTime();
         mLaboratoriesTimeWeek = st.getLabTime();
         mPracticalTimeWeek = st.getPracticalTime();
         mSeminarTimeWeek = st.getSemionarTime();
-        mCurse = curse;
         mLection = lection;
     }
 
+    public Occupations.Curse getCurse() {
+        return mCurse;
+    }
+    
     @Override
     void calculateFactor(Factors factors) {
         float kjk = ((mLectionTimeWeek * factors.getFactorKL(mLection))
@@ -38,10 +40,10 @@ public class Discipline extends Employment {
         kjk /= (mLectionTimeWeek + mLaboratoriesTimeWeek + mPracticalTimeWeek + mSeminarTimeWeek);
 
         mKoef = ((1.44f * mCredits * kjk * factors.getFactorKN(mCurse,
-                mStudyForm))
-                + (0.2f * factors.getFactorKN(mCurse, mStudyForm))
+                StudingForm.DAILY))
+                + (0.2f * factors.getFactorKN(mCurse, StudingForm.DAILY))
                 + (0.33f * mCredits)
-                + (0.086f * mCredits * factors.getFactorKN(mCurse, mStudyForm)) + 0.5f)
+                + (0.086f * mCredits * factors.getFactorKN(mCurse, StudingForm.DAILY)) + 0.5f)
                 * mContingent * factors.getFactorKM(mLection);
     }
 }

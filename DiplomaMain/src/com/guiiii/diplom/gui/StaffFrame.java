@@ -1,5 +1,6 @@
 package com.guiiii.diplom.gui;
 
+//import java.awt.Dialog.ModalExclusionType;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +27,7 @@ public class StaffFrame extends JFrame {
     private final JTextField textField;
 
     public StaffFrame(final MainFrameListener mf) {
-        setType(Type.POPUP);
+        // setType(Type.POPUP);
         setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 317, 178);
