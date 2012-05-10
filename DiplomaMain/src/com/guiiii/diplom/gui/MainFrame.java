@@ -33,6 +33,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.guiiii.diplom.parcers.DisciplineParser;
 import com.guiiii.diplom.parcers.KafedrasParser;
+import com.guiiii.diplom.parcers.ReportSaver;
 import com.guiiii.diplom.uchchast.Employment;
 import com.guiiii.diplom.util.MainFrameListener;
 
@@ -108,8 +109,7 @@ public class MainFrame extends JFrame {
         
         
         
-        JMenuItem menuItem_3 = new JMenuItem("Общий отчет");
-        mnNewMenu_1.add(menuItem_3);
+        
         
         JMenu mnNewMenu_2 = new JMenu("Помощь");
         menuBar.add(mnNewMenu_2);
@@ -333,7 +333,7 @@ public class MainFrame extends JFrame {
         btnNewButton.setEnabled(true);
     }
     
-    public void canReport(List<Employment> emplo) {
+    public void canReport(final List<Employment> emplo) {
            mEmplo = emplo;
            Set <String> kaf = new HashSet<String>();
            Set <String> napr = new HashSet<String>();
@@ -361,6 +361,24 @@ public class MainFrame extends JFrame {
                    }
                });
            }
+           
+           JMenuItem menuItem_3 = new JMenuItem("Общий отчет");
+           menuItem_3.addActionListener(new ActionListener() {
+               public void actionPerformed(ActionEvent e) {
+                   JFileChooser c = new JFileChooser();
+                   c.setSelectedFile(new File("Общие.xls"));
+                   //c.setfi
+                   // Demonstrate "Save" dialog:
+                   int rVal = c.showSaveDialog(MainFrame.this);//(MainFrame.this, "");
+                   if (rVal == JFileChooser.APPROVE_OPTION) {
+                     System.out.println(c.getSelectedFile().getPath());
+
+                   }
+
+                  //ReportSaver.save("Общий отчет", emplo);
+               }
+           });
+           mnNewMenu_1.add(menuItem_3);
            
            mnNewMenu_1.setEnabled(true);
     }
