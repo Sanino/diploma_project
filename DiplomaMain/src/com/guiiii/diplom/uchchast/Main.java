@@ -1,6 +1,7 @@
 package com.guiiii.diplom.uchchast;
 
 import java.awt.EventQueue;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -200,6 +201,18 @@ public class Main {
                 }
                 mf.addToLog("Нагрузка кафедры " + kaf + ": " + kaffStaff);
             }
+            
+            List <Employment> emplo = new ArrayList<Employment>();
+            for (Discipline d : disciplines) {
+                emplo.add(d);
+            }
+            for (DisciplineZaoch d : zaoch) {
+                emplo.add(d);
+            }
+            for (OtherWork d : otherWorks) {
+                emplo.add(d);
+            }
+            mf.canReport(emplo);
 
         }
 
