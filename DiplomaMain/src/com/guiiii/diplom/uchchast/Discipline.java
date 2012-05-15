@@ -25,9 +25,7 @@ public class Discipline extends Employment {
         mLection = lection;
     }
 
-    public Occupations.Curse getCurse() {
-        return mCurse;
-    }
+
     
     @Override
     void calculateFactor(Factors factors) {

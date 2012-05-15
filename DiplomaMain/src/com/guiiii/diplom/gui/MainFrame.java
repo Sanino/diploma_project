@@ -35,6 +35,7 @@ import com.guiiii.diplom.parcers.DisciplineParser;
 import com.guiiii.diplom.parcers.KafedrasParser;
 import com.guiiii.diplom.parcers.ReportSaver;
 import com.guiiii.diplom.uchchast.Employment;
+import com.guiiii.diplom.uchchast.Kafedra;
 import com.guiiii.diplom.util.MainFrameListener;
 
 public class MainFrame extends JFrame {
@@ -119,6 +120,10 @@ public class MainFrame extends JFrame {
         
         JMenuItem menuItem_5 = new JMenuItem("О программе");
         mnNewMenu_2.add(menuItem_5);
+        
+        menuItem_3 = new JMenuItem("Общий отчет");
+        mnNewMenu_1.add(menuItem_3);
+        
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -333,7 +338,7 @@ public class MainFrame extends JFrame {
         btnNewButton.setEnabled(true);
     }
     
-    public void canReport(final List<Employment> emplo) {
+    public void canReport(final List<Employment> emplo, final List<Kafedra> kafedrasWorks) {
            mEmplo = emplo;
            Set <String> kaf = new HashSet<String>();
            Set <String> napr = new HashSet<String>();
@@ -342,6 +347,7 @@ public class MainFrame extends JFrame {
                napr.add(e.getNapr());
            }
            
+           menu.removeAll();
            for(String s: kaf) {
                final JMenuItem mntmTest = new JMenuItem(s);
                menu.add(mntmTest);
@@ -352,33 +358,33 @@ public class MainFrame extends JFrame {
                });
            }
            
-           for(String s: napr) {
+           menu_1.removeAll();
+           for(final String s: napr) {
                final JMenuItem mntmTest = new JMenuItem(s);
                menu_1.add(mntmTest);
                mntmTest.addActionListener(new ActionListener() {
                    public void actionPerformed(ActionEvent e) {
-                       mntmTest.getText();
+                       System.out.println(s);
+                       //ReportSaver.save(mntmTest.getText(), emplo, kafedrasWorks);
+                       //;
                    }
                });
            }
+
            
-           JMenuItem menuItem_3 = new JMenuItem("Общий отчет");
            menuItem_3.addActionListener(new ActionListener() {
                public void actionPerformed(ActionEvent e) {
                    JFileChooser c = new JFileChooser();
                    c.setSelectedFile(new File("Общие.xls"));
-                   //c.setfi
-                   // Demonstrate "Save" dialog:
-                   int rVal = c.showSaveDialog(MainFrame.this);//(MainFrame.this, "");
+                   int rVal = c.showSaveDialog(MainFrame.this);
                    if (rVal == JFileChooser.APPROVE_OPTION) {
-                     System.out.println(c.getSelectedFile().getPath());
-
+                     String path = c.getSelectedFile().getPath();
+                     ReportSaver.save(path,"Общая нагрузка", emplo, kafedrasWorks);
                    }
 
-                  //ReportSaver.save("Общий отчет", emplo);
                }
            });
-           mnNewMenu_1.add(menuItem_3);
+           
            
            mnNewMenu_1.setEnabled(true);
     }
@@ -387,4 +393,5 @@ public class MainFrame extends JFrame {
     private JMenu mnNewMenu_1;
     private JMenu menu;
     private JMenu menu_1;
+    private JMenuItem menuItem_3;
 }

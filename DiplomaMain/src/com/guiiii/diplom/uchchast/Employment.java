@@ -3,7 +3,6 @@ package com.guiiii.diplom.uchchast;
 import com.guiiii.diplom.koefandenums.Factors;
 import com.guiiii.diplom.koefandenums.Occupations;
 import com.guiiii.diplom.koefandenums.Occupations.Curse;
-import com.guiiii.diplom.koefandenums.Occupations.StudingForm;
 
 public abstract class Employment {
 
@@ -53,4 +52,14 @@ public abstract class Employment {
     public void setStuff(float stuff) {
         mStuff = stuff;
     }
+    
+    public Occupations.Curse getCurse() {
+        return mCurse;
+    }
+    
+    public float getCredit() {
+        return mCredits;
+    }
+    
+    
 }

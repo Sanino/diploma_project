@@ -212,7 +212,7 @@ public class Main {
             for (OtherWork d : otherWorks) {
                 emplo.add(d);
             }
-            mf.canReport(emplo);
+            mf.canReport(emplo, mKaf);
 
         }
 
