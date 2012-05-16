@@ -45,9 +45,9 @@ public class ReportSaver {
         wb.setSheetName(0, name);
         int rownum = 0;
         r = s.createRow(rownum++);
-        c = r.createCell(0);
+        c = r.createCell(1);
         c.setCellStyle(cs);
-        c.setCellValue("Шапка");
+        c.setCellValue(name);
         rownum += 2;
         r = s.createRow(rownum++);
         c = r.createCell(0);
@@ -145,6 +145,55 @@ public class ReportSaver {
             c.setCellValue(e.getStuff());
 
         }
+        
+        
+        //SECOND TABLE
+        rownum += 2;
+        if (kaf != null) {
+            r = s.createRow(rownum++);
+            c = r.createCell(0);
+            c.setCellStyle(cs);
+            c.setCellValue("#");
+            c = r.createCell(1);
+            c.setCellStyle(cs);
+            c.setCellValue("Кафедра");
+            c = r.createCell(2);
+            c.setCellStyle(cs);
+            c.setCellValue("Вступ");
+            c = r.createCell(3);
+            c.setCellStyle(cs);
+            c.setCellValue("Асп");
+            c = r.createCell(4);
+            c.setCellStyle(cs);
+            c.setCellValue("Док");
+            c = r.createCell(5);
+            c.setCellStyle(cs);
+            c.setCellValue("Стаж");
+            
+            i = 1;
+            for (Kafedra k: kaf) {
+                r = s.createRow(rownum++);
+                c = r.createCell(0);
+                c.setCellStyle(cs);
+                c.setCellValue(i++);  
+                c = r.createCell(1);
+                c.setCellStyle(cs);
+                c.setCellValue(k.getKafedraName());
+                c = r.createCell(2);
+                c.setCellStyle(cs);
+                c.setCellValue(k.getVstupStuff());
+                c = r.createCell(3);
+                c.setCellStyle(cs);
+                c.setCellValue(k.getAspStuff());
+                c = r.createCell(4);
+                c.setCellStyle(cs);
+                c.setCellValue(k.getDocStuff());
+                c = r.createCell(5);
+                c.setCellStyle(cs);
+                c.setCellValue(k.getStagStuff());
+            }
+        }
+        
         r = s.createRow(rownum);
         s.autoSizeColumn(0);
         s.autoSizeColumn(1);
@@ -168,5 +217,9 @@ public class ReportSaver {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
+        
+        
+
+        
     }
 }

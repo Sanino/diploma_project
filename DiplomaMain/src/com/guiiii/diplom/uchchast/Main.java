@@ -32,6 +32,11 @@ public class Main {
                 vstupSum += k.getVstup();
                 doctSum += k.getDoc();
                 stagSum += k.getStag();
+                
+                k.setAspStuff(k.getAsp() * mFactors.getKafFactors(KafFactors.ASP));
+                k.setVstupStuff(k.getVstup() * mFactors.getKafFactors(KafFactors.VSTUP));
+                k.setDocStuff(k.getDoc() * mFactors.getKafFactors(KafFactors.DOC));
+                k.setStagStuff(k.getStag() * mFactors.getKafFactors(KafFactors.STAG));
             }
             mf.addToLog("Нагрузка необходимая на проведение вступительных экзаменов: "
                     + vstupSum

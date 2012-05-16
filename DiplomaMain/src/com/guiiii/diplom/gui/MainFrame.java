@@ -8,6 +8,9 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -348,12 +351,30 @@ public class MainFrame extends JFrame {
            }
            
            menu.removeAll();
-           for(String s: kaf) {
+           for(final String s: kaf) {
                final JMenuItem mntmTest = new JMenuItem(s);
                menu.add(mntmTest);
                mntmTest.addActionListener(new ActionListener() {
                    public void actionPerformed(ActionEvent e) {
-                       mntmTest.getText();
+                       JFileChooser c = new JFileChooser();
+                       c.setSelectedFile(new File(s + ".xls"));
+                       List<Employment> emploKaf = new ArrayList<Employment>();
+                       for(Employment em: emplo) {
+                           if (em.getKafedra().equals(s)){
+                               emploKaf.add(em);
+                           }
+                       }
+                       List<Kafedra> kafw = new ArrayList<Kafedra>();
+                       for(Kafedra kafs: kafedrasWorks) {
+                           if (kafs.getKafedraName().equals(s)){
+                               kafw.add(kafs);
+                           }
+                       }
+                       int rVal = c.showSaveDialog(MainFrame.this);
+                       if (rVal == JFileChooser.APPROVE_OPTION) {
+                         String path = c.getSelectedFile().getPath();
+                         ReportSaver.save(path,"Нагрузка кафедры " + s, emploKaf, kafw);
+                       }
                    }
                });
            }
@@ -364,9 +385,19 @@ public class MainFrame extends JFrame {
                menu_1.add(mntmTest);
                mntmTest.addActionListener(new ActionListener() {
                    public void actionPerformed(ActionEvent e) {
-                       System.out.println(s);
-                       //ReportSaver.save(mntmTest.getText(), emplo, kafedrasWorks);
-                       //;
+                       JFileChooser c = new JFileChooser();
+                       c.setSelectedFile(new File(s + ".xls"));
+                       List<Employment> emploKaf = new ArrayList<Employment>();
+                       for(Employment em: emplo) {
+                           if (em.getNapr().equals(s)){
+                               emploKaf.add(em);
+                           }
+                       }
+                       int rVal = c.showSaveDialog(MainFrame.this);
+                       if (rVal == JFileChooser.APPROVE_OPTION) {
+                         String path = c.getSelectedFile().getPath();
+                         ReportSaver.save(path,"Нагрузка направления " + s, emploKaf, null);
+                       }
                    }
                });
            }
@@ -381,7 +412,6 @@ public class MainFrame extends JFrame {
                      String path = c.getSelectedFile().getPath();
                      ReportSaver.save(path,"Общая нагрузка", emplo, kafedrasWorks);
                    }
-
                }
            });
            

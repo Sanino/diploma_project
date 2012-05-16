@@ -2,6 +2,7 @@ package com.guiiii.diplom.parcers;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -48,12 +49,17 @@ public class KafedrasParser {
     private void parseLoad(Row row) {
         try {
             final String name = row.getCell(0).getStringCellValue();
-            final int vstup = (int) row.getCell(1).getNumericCellValue();
+            final int vstup =(int) row.getCell(1).getNumericCellValue();
             final int asp = (int) row.getCell(2).getNumericCellValue();
             final int doc = (int) row.getCell(3).getNumericCellValue();
             final int stag = (int) row.getCell(4).getNumericCellValue();
-
-            kafedras.add(new Kafedra(name, vstup, asp, doc, stag));
+            if(name.equals("") || (vstup == 0 && asp == 0 && doc == 0 && stag == 0)) {
+                throw new IOException();
+            }
+            
+       
+            kafedras.add(new Kafedra(name, vstup, asp,
+                    doc, stag));
 
         } catch (final Exception e) {
             // e.printStackTrace();

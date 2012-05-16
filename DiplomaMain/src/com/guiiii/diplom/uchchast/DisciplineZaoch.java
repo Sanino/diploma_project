@@ -20,7 +20,7 @@ public class DisciplineZaoch extends Employment {
     
     void calculateFactor(Factors factors, Discipline d) {
         // TODO Auto-generated method stub
-        mKoef = d.getKoef() * ((mContingent * factors.getFactorKN(mCurse, StudingForm.DAILY)) /
+        mKoef = d.getKoef() * ((mContingent * factors.getFactorKN(mCurse, StudingForm.ZAOCH)) /
                 (d.getContingent() * factors.getFactorKN(d.getCurse(), StudingForm.DAILY)));
     }
 
