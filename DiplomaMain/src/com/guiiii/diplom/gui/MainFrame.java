@@ -71,6 +71,7 @@ public class MainFrame extends JFrame {
      * Create the frame.
      */
     public MainFrame(MainFrameListener mainframeListener) {
+        setLocationByPlatform(true);
         setResizable(false);
         mMainFrameListener = mainframeListener;
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -153,9 +154,10 @@ public class MainFrame extends JFrame {
                     @Override
                     public void run() {
                         try {
-                            final StaffFrame frame = new StaffFrame(
-                                    mMainFrameListener);
-                            frame.setVisible(true);
+                            if(frame == null || !frame.isShowing()){
+                                frame = new StaffFrame(mMainFrameListener);
+                                frame.setVisible(true);
+                            }
                         } catch (final Exception e) {
                             e.printStackTrace();
                         }
@@ -179,12 +181,12 @@ public class MainFrame extends JFrame {
                             mMainFrameListener);
                     if (parserResult == 1) {
                         JOptionPane.showMessageDialog(MainFrame.this,
-                                "�������� ������ �����!", "������",
+                                "Неверный формат файла!", "Ошибка",
                                 JOptionPane.ERROR_MESSAGE);
 
                     } else if (parserResult == 2) {
                         JOptionPane.showMessageDialog(MainFrame.this,
-                                "�������� ������ ������� Excel", "������",
+                                "Неверный формат таблицы Excel", "Ошибка",
                                 JOptionPane.ERROR_MESSAGE);
                     } else {
 
@@ -207,12 +209,12 @@ public class MainFrame extends JFrame {
                             mMainFrameListener);
                     if (parserResult == 1) {
                         JOptionPane.showMessageDialog(MainFrame.this,
-                                "�������� ������ �����!", "������",
+                                "Неверный формат файла!", "Ошибка",
                                 JOptionPane.ERROR_MESSAGE);
 
                     } else if (parserResult == 2) {
                         JOptionPane.showMessageDialog(MainFrame.this,
-                                "�������� ������ ������� Excel", "������",
+                                "Неверный формат таблицы Excel", "Ошибка",
                                 JOptionPane.ERROR_MESSAGE);
                     } else {
 
@@ -424,4 +426,5 @@ public class MainFrame extends JFrame {
     private JMenu menu;
     private JMenu menu_1;
     private JMenuItem menuItem_3;
+    private StaffFrame frame;
 }

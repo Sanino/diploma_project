@@ -46,7 +46,7 @@ public class ReportSaver {
         int rownum = 0;
         r = s.createRow(rownum++);
         c = r.createCell(1);
-        c.setCellStyle(cs);
+        //c.setCellStyle(cs);
         c.setCellValue(name);
         rownum += 2;
         r = s.createRow(rownum++);

@@ -223,6 +223,7 @@ public class Main {
 
         @Override
         public void setFactors() {
+            
             launchFactorsFrame(mFactorsFrameListener);
         }
 
@@ -395,8 +396,10 @@ public class Main {
             @Override
             public void run() {
                 try {
-                    ff = new FactorsFrame(ffl);
-                    ff.setVisible(true);
+                    if(ff == null || !ff.isShowing()) {
+                        ff = new FactorsFrame(ffl);
+                        ff.setVisible(true);
+                    }
                 } catch (final Exception e) {
                     e.printStackTrace();
                 }

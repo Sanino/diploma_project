@@ -1,6 +1,7 @@
 package com.guiiii.diplom.gui;
 
 //import java.awt.Dialog.ModalExclusionType;
+import java.awt.Color;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.guiiii.diplom.util.MainFrameListener;
+import java.awt.Frame;
 
 public class StaffFrame extends JFrame {
 
@@ -27,9 +29,9 @@ public class StaffFrame extends JFrame {
     private final JTextField textField;
 
     public StaffFrame(final MainFrameListener mf) {
-        // setType(Type.POPUP);
-        setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationByPlatform(true);
+        setResizable(false);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 317, 178);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -41,8 +43,19 @@ public class StaffFrame extends JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                mf.setStuff(Float.parseFloat(textField.getText()));
-                dispose();
+                boolean isOk = true;
+                try {
+                    if (Float.parseFloat(textField.getText()) <= 1) {
+                        throw new Exception();
+                    }
+                } catch (Exception e3) {
+                    isOk = false;
+                    label.setForeground(Color.RED);
+                }
+                if(isOk == true) {
+                    mf.setStuff(Float.parseFloat(textField.getText()));
+                    dispose();
+                }
             }
         });
 

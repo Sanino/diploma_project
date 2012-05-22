@@ -46,12 +46,12 @@ public class DisciplineParser {
                 parseLoad(row);
             }
         } catch (final Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return 1;
         }
 
         if ((disciplines.size() == 0) && (otherWorks.size() == 0)) {
-            return 1;
+            return 2;
         }
 
         mMainFrameListener.setStudingPlan(disciplines,disciplinesZ, otherWorks);

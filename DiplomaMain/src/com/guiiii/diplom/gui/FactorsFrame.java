@@ -27,6 +27,7 @@ import javax.swing.border.TitledBorder;
 
 import com.guiiii.diplom.koefandenums.FactorsHelper;
 import com.guiiii.diplom.util.FactorsFrameListener;
+import java.awt.Dialog.ModalExclusionType;
 
 public class FactorsFrame extends JFrame {
 
@@ -106,8 +107,10 @@ public class FactorsFrame extends JFrame {
     private final JTextField stag;
 
     public FactorsFrame(FactorsFrameListener ffl) {
+        setLocationByPlatform(true);
+        setResizable(false);
         mFactorsFrameListener = ffl;
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 450, 300);
         setSize(510, 680);
         contentPane = new JPanel();
@@ -384,7 +387,10 @@ public class FactorsFrame extends JFrame {
                 }
                 for (final JTextField jtf : content.keySet()) {
                     try {
-                        Float.parseFloat(jtf.getText());
+                        if(Float.parseFloat(jtf.getText()) <= 0) {
+                            throw new Exception();
+                        }
+                        
                         // content.get(jtf).getF
                     } catch (final Exception e1) {
                         isOk = false;
