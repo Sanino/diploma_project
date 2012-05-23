@@ -3,45 +3,33 @@ package com.guiiii.diplom.koefandenums;
 public class Factors {
 
     private final float mDayliFirst;
-
     private final float mDayliSecond;
-
     private final float mDayliThird;
-
     private final float mDayliFourth;
-
     private final float mDayliSpecialist;
-
     private final float mDayliMagistr;
-
     private final float mZaochFirst;
-
     private final float mZaochSecond;
     private final float mZaochThird;
     private final float mZaochFourth;
     private final float mZaochSpecialist;
     private final float mLectionZO;
     private final float mLectionPS;
-
     private final float mLectionPV;
     private final float mLectionSP;
     private final float mLectionMP;
     private final float mLaboratories;
     private final float mPractical;// for test result
-
     private final float mSeminar;
     private final float mClassTypeFirst;
     private final float mClassTypeSecond;
     private final float mKursWorkFirst;
     private final float mKursWorkSecond;
-
     private final float mKursProjectFirst;
     private final float mKursProjectSecond;
     private final float mStudingPructic;
-
     private final float mWorkingPructic;
     private final float mUnderGradupterPractic;
-
     private final float mStateExam;
     private final float mDiplomaGuide;
     private final float mDiplomaEcomomicConsultation;

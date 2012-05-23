@@ -70,7 +70,6 @@ public class Main {
 
             if (uchStuff < 0) {
                 hasStaff = false;
-
                 return;
             }
 
@@ -119,14 +118,12 @@ public class Main {
                         + " дневной формы обучения: " + dayliStuff);
                 mf.addToLog("Контингент направления - " + napr
                         + " заочной формы обучения: " + zaochStuff);
-                mf.addToLog("Контингент направления - " + napr
-                        + " других видов работ: " + otherStuff);
 
                 mf.addToLog("Суммарный приведенный контингент направения "
                         + napr + ": " + (dayliStuff + (0.2 * zaochStuff)));
 
-                sumPriv.put(napr, (float) (dayliStuff * 0.2 * zaochStuff));
-                privAllSum += (float) (dayliStuff * 0.2 * zaochStuff);
+                sumPriv.put(napr, (float) (dayliStuff + (0.2 * zaochStuff)));
+                privAllSum += (float) (dayliStuff + (0.2 * zaochStuff));
             }
 
             ///////
@@ -185,6 +182,7 @@ public class Main {
                 }
             }
 
+            float sumKaf = 0;
             for (final String kaf : kafedr.keySet()) {
                 float kaffStaff = 0;
                 for (final Discipline d : disciplines) {
@@ -204,8 +202,21 @@ public class Main {
                         kaffStaff += d.getStuff();
                     }
                 }
+                
+                for (final Kafedra d : mKaf) {
+                    if(d.getKafedraName().equals(kaf)) {
+                        kaffStaff += d.getAspStuff();
+                        kaffStaff += d.getDocStuff();
+                        kaffStaff += d.getStagStuff();
+                        kaffStaff += d.getVstupStuff();
+                    }
+                }
+                
+                
+                sumKaf += kaffStaff;
                 mf.addToLog("Нагрузка кафедры " + kaf + ": " + kaffStaff);
             }
+            mf.addToLog("Нагрузка по всем кафедрам " + sumKaf);
             
             List <Employment> emplo = new ArrayList<Employment>();
             for (Discipline d : disciplines) {
@@ -315,6 +326,7 @@ public class Main {
                 i++;
             }
             
+            mf.addToLog("Заочные дисциплины:");
             i = 0;
             for (final DisciplineZaoch d : zaoch) {
                 mf.addToLog("" + (i + 1) + ". " + d.getName());

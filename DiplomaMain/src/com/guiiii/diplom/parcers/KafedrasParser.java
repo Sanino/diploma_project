@@ -16,9 +16,10 @@ import com.guiiii.diplom.uchchast.Kafedra;
 import com.guiiii.diplom.util.MainFrameListener;
 
 public class KafedrasParser {
-    List<Kafedra> kafedras = new ArrayList<Kafedra>();
+    List<Kafedra> kafedras ;
 
     public int open(File file, MainFrameListener mMainFrameListener) {
+        kafedras = new ArrayList<Kafedra>();
         try {
             final InputStream in = new FileInputStream(file);
             final HSSFWorkbook wb = new HSSFWorkbook(in);

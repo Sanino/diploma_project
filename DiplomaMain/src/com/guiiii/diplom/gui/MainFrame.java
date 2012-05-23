@@ -347,18 +347,21 @@ public class MainFrame extends JFrame {
            mEmplo = emplo;
            Set <String> kaf = new HashSet<String>();
            Set <String> napr = new HashSet<String>();
+           
            for (Employment e: emplo) {
                kaf.add(e.getKafedra());
                napr.add(e.getNapr());
            }
            
+
            menu.removeAll();
            for(final String s: kaf) {
                final JMenuItem mntmTest = new JMenuItem(s);
                menu.add(mntmTest);
+
                mntmTest.addActionListener(new ActionListener() {
                    public void actionPerformed(ActionEvent e) {
-                       JFileChooser c = new JFileChooser();
+                       
                        c.setSelectedFile(new File(s + ".xls"));
                        List<Employment> emploKaf = new ArrayList<Employment>();
                        for(Employment em: emplo) {
@@ -385,9 +388,9 @@ public class MainFrame extends JFrame {
            for(final String s: napr) {
                final JMenuItem mntmTest = new JMenuItem(s);
                menu_1.add(mntmTest);
+               mntmTest.removeAll();
                mntmTest.addActionListener(new ActionListener() {
                    public void actionPerformed(ActionEvent e) {
-                       JFileChooser c = new JFileChooser();
                        c.setSelectedFile(new File(s + ".xls"));
                        List<Employment> emploKaf = new ArrayList<Employment>();
                        for(Employment em: emplo) {
@@ -404,10 +407,9 @@ public class MainFrame extends JFrame {
                });
            }
 
-           
+           menuItem_3.removeAll();
            menuItem_3.addActionListener(new ActionListener() {
                public void actionPerformed(ActionEvent e) {
-                   JFileChooser c = new JFileChooser();
                    c.setSelectedFile(new File("Общие.xls"));
                    int rVal = c.showSaveDialog(MainFrame.this);
                    if (rVal == JFileChooser.APPROVE_OPTION) {
@@ -421,6 +423,7 @@ public class MainFrame extends JFrame {
            mnNewMenu_1.setEnabled(true);
     }
     
+    JFileChooser c = new JFileChooser();
     private List<Employment> mEmplo;
     private JMenu mnNewMenu_1;
     private JMenu menu;

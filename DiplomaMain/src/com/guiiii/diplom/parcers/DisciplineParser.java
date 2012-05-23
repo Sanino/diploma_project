@@ -22,17 +22,21 @@ import com.guiiii.diplom.uchchast.StudyTiming;
 import com.guiiii.diplom.util.MainFrameListener;
 
 public class DisciplineParser {
-    List<Discipline> disciplines = new ArrayList<Discipline>();
-    List<DisciplineZaoch> disciplinesZ = new ArrayList<DisciplineZaoch>();
+    List<Discipline> disciplines ;
+    
+    List<DisciplineZaoch> disciplinesZ ;
 
-    List<OtherWork> otherWorks = new ArrayList<OtherWork>();
+    List<OtherWork> otherWorks ;
 
     public DisciplineParser() {
 
     }
 
     public int open(File file, MainFrameListener mMainFrameListener) {
-
+        disciplines = new ArrayList<Discipline>();
+        disciplinesZ = new ArrayList<DisciplineZaoch>();
+        otherWorks = new ArrayList<OtherWork>();
+        
         try {
             final InputStream in = new FileInputStream(file);
             final HSSFWorkbook wb = new HSSFWorkbook(in);
